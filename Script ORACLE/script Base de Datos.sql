@@ -192,12 +192,63 @@ BEGIN
 END;
 
 --metodo renta
+CREATE SEQUENCE metodo_renta_seq START WITH 1 INCREMENT BY 1;
+CREATE TABLE METODO_RENTA(
+    id_metodo_renta NUMBER PRIMARY KEY NOT NULL,
+    descripcion VARCHAR2(100),
+    fecha_modif DATE,
+    usuario_modif VARCHAR2(100)
+);
 
+CREATE OR REPLACE TRIGGER trg_metodo_renta_id
+BEFORE INSERT ON METODO_RENTA
+FOR EACH ROW
+BEGIN
+  :NEW.id_metodo_renta := metodo_renta_seq.NEXTVAL;
+END;
 
 --tipo estado reservacion
+CREATE SEQUENCE estado_reservacion_seq START WITH 1 INCREMENT BY 1;
+CREATE TABLE TIPO_ESTADO_RESERVACION(
+    id_estado_reservacion NUMBER PRIMARY KEY NOT NULL,
+    descripcion VARCHAR2(100),
+    fecha_modif DATE,
+    usuario_modif VARCHAR2(100)
+);
 
+CREATE OR REPLACE TRIGGER trg_estado_reservacion_id
+BEFORE INSERT ON TIPO_ESTADO_RESERVACION
+FOR EACH ROW
+BEGIN
+  :NEW.id_estado_reservacion := estado_reservacion_seq.NEXTVAL;
+END;
 
 --reservacion
+CREATE SEQUENCE reservacion_seq START WITH 1 INCREMENT BY 1;
+CREATE TABLE RESERVACION (
+    id_reservacion NUMBER PRIMARY KEY NOT NULL,
+    id_metodo_renta NUMBER NOT NULL,
+    id_estado_reservacion NUMBER NOT NULL,
+    id_inventario NUMBER NOT NULL,
+    id_usuario NUMBER NOT NULL,
+    fecha_inicio DATE,        
+    fecha_fin DATE,     
+    monto_pago NUMBER(20,2),
+    fecha_modif DATE,
+    usuario_modif VARCHAR2(100),  
+    CONSTRAINT fk_reservacion_metodo_renta FOREIGN KEY (id_metodo_renta) REFERENCES METODO_RENTA(id_metodo_renta),
+    CONSTRAINT fk_reservacion_estado_reservacion FOREIGN KEY (id_estado_reservacion) REFERENCES TIPO_ESTADO_RESERVACION(id_estado_reservacion),
+    CONSTRAINT fk_reservacion_inventario FOREIGN KEY (id_inventario) REFERENCES INVENTARIO(id_inventario),
+    CONSTRAINT fk_reservacion_usuario FOREIGN KEY (id_usuario) REFERENCES USUARIO(id_usuario)
+);
+
+CREATE OR REPLACE TRIGGER trg_reservacion_id
+BEFORE INSERT ON reservacion
+FOR EACH ROW
+BEGIN
+  :NEW.id_reservacion := reservacion_seq.NEXTVAL;
+END;
+
 
 --VISTAS 
 
