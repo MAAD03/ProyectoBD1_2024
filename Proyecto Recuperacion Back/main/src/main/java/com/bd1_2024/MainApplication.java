@@ -1,4 +1,4 @@
-package com.bd1_2024.main;
+package com.bd1_2024;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
