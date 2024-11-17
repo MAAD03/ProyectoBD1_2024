@@ -11,30 +11,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bd1_2024.entity.Bitacora;
-import com.bd1_2024.repository.BitacoraRepository;
+import com.bd1_2024.entity.Reservacion;
+import com.bd1_2024.repository.ReservacionRepository;
 
 @RestController
-@RequestMapping("/bitacora")
-public class BitacoraServicio {
+@RequestMapping("/reservacion")
+public class ReservacionServicio {
 
     @Autowired
-    BitacoraRepository bitacoraRepository;
+    ReservacionRepository reservacionRepository;
 
     @GetMapping(path = "/buscar")
-    public List<Bitacora> buscar() {
-        return bitacoraRepository.findAll();
+    public List<Reservacion> buscar() {
+        return reservacionRepository.findAll();
 
     }
 
     @PostMapping(path = "/guardar")
-    public Bitacora guardar(@RequestBody Bitacora bitacora) {
-        return bitacoraRepository.save(bitacora);
+    public Reservacion guardar(@RequestBody Reservacion reservacion) {
+        return reservacionRepository.save(reservacion);
     }
 
-    @DeleteMapping(path = "/eliminar/{idBitacora}")
-    public void eliminar(@PathVariable("idBitacora") Long idBitacora) {
-        bitacoraRepository.deleteById(idBitacora);
+    @DeleteMapping(path = "/eliminar/{idReservacion}")
+    public void eliminar(@PathVariable("idReservacion") Long idReservacion) {
+        reservacionRepository.deleteById(idReservacion);
 
     }
 }

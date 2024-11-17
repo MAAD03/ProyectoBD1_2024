@@ -1,18 +1,43 @@
 package com.bd1_2024.entity;
 
+import java.util.Date;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Entity
+@Table(name = "BITACORA")
+@Data
 public class Bitacora {
 
-}
+    @Id
+    @Column(name = "id_bitacora")
+    private Long idBitacora;
 
-/*
- * CREATE TABLE BITACORA (
- * id_bitacora NUMBER PRIMARY KEY NOT NULL,
- * operacion VARCHAR2(100),
- * detalle_operacion VARCHAR2(100),
- * fecha_modif DATE,
- * usuario_modif VARCHAR2(100),
- * nombre_tabla VARCHAR2(100),
- * datos_anterior CLOB,
- * datos_nuevos CLOB
- * );
- */
+    @Column(name = "operacion", length = 100, nullable = true)
+    private String operacion;
+
+    @Column(name = "detalle_operacion", length = 100, nullable = true)
+    private String detalleOperacion;
+
+    @Column(name = "fecha_modif")
+    private Date fechaModif;
+
+    @Column(name = "usuario_modif", length = 100, nullable = true)
+    private String usuarioModif;
+
+    @Column(name = "nombre_tabla", length = 100, nullable = true)
+    private String nombreTabla;
+
+    @Lob
+    @Column(name = "datos_anterior")
+    private String datosAnterior;
+
+    @Lob
+    @Column(name = "datos_nuevos")
+    private String datosNuevos;
+
+}

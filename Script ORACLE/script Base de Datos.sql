@@ -37,13 +37,20 @@ END;
 
 
 --menu_rol
+CREATE SEQUENCE menurol_seq START WITH 1 INCREMENT BY 1;
 CREATE TABLE MENU_ROL (
+    id_menurol NUMBER PRIMARY KEY NOT NULL,
     id_rol NUMBER NOT NULL,
     id_menu NUMBER NOT NULL,
-    CONSTRAINT pk_menu_rol PRIMARY KEY (id_rol, id_menu),
-    CONSTRAINT fk_rol FOREIGN KEY (id_rol) REFERENCES ROL(id_rol),
-    CONSTRAINT fk_menu FOREIGN KEY (id_menu) REFERENCES MENU(id_menu)
+    CONSTRAINT fk_menurol_rol FOREIGN KEY (id_rol) REFERENCES ROL(id_rol),
+    CONSTRAINT fk_menurol_menu FOREIGN KEY (id_menu) REFERENCES MENU(id_menu)
 );
+CREATE OR REPLACE TRIGGER trg_menurol_id
+BEFORE INSERT ON MENU_ROL
+FOR EACH ROW
+BEGIN
+  :NEW.id_menurol := menurol_seq.NEXTVAL;
+END;
 
 
 --usuario

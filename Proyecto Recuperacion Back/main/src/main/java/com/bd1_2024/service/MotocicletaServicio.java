@@ -11,30 +11,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bd1_2024.entity.Bitacora;
-import com.bd1_2024.repository.BitacoraRepository;
+import com.bd1_2024.entity.Motocicleta;
+import com.bd1_2024.repository.MotocicletaRepository;
 
 @RestController
-@RequestMapping("/bitacora")
-public class BitacoraServicio {
+@RequestMapping("/motocicleta")
+public class MotocicletaServicio {
 
     @Autowired
-    BitacoraRepository bitacoraRepository;
+    MotocicletaRepository motocicletaRepository;
 
     @GetMapping(path = "/buscar")
-    public List<Bitacora> buscar() {
-        return bitacoraRepository.findAll();
+    public List<Motocicleta> buscar() {
+        return motocicletaRepository.findAll();
 
     }
 
     @PostMapping(path = "/guardar")
-    public Bitacora guardar(@RequestBody Bitacora bitacora) {
-        return bitacoraRepository.save(bitacora);
+    public Motocicleta guardar(@RequestBody Motocicleta motocicleta) {
+        return motocicletaRepository.save(motocicleta);
     }
 
-    @DeleteMapping(path = "/eliminar/{idBitacora}")
-    public void eliminar(@PathVariable("idBitacora") Long idBitacora) {
-        bitacoraRepository.deleteById(idBitacora);
+    @DeleteMapping(path = "/eliminar/{idMotocicleta}")
+    public void eliminar(@PathVariable("idMotocicleta") Long idMotocicleta) {
+        motocicletaRepository.deleteById(idMotocicleta);
 
     }
+
 }

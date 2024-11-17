@@ -11,30 +11,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bd1_2024.entity.Bitacora;
-import com.bd1_2024.repository.BitacoraRepository;
+import com.bd1_2024.entity.MetodoRenta;
+import com.bd1_2024.repository.MetodoRentaRepository;
 
 @RestController
-@RequestMapping("/bitacora")
-public class BitacoraServicio {
+@RequestMapping("/metodoRenta")
+public class MetodoRentaServicio {
 
     @Autowired
-    BitacoraRepository bitacoraRepository;
+    MetodoRentaRepository metodoRentaRepository;
 
     @GetMapping(path = "/buscar")
-    public List<Bitacora> buscar() {
-        return bitacoraRepository.findAll();
+    public List<MetodoRenta> buscar() {
+        return metodoRentaRepository.findAll();
 
     }
 
     @PostMapping(path = "/guardar")
-    public Bitacora guardar(@RequestBody Bitacora bitacora) {
-        return bitacoraRepository.save(bitacora);
+    public MetodoRenta guardar(@RequestBody MetodoRenta metodoRenta) {
+        return metodoRentaRepository.save(metodoRenta);
     }
 
-    @DeleteMapping(path = "/eliminar/{idBitacora}")
-    public void eliminar(@PathVariable("idBitacora") Long idBitacora) {
-        bitacoraRepository.deleteById(idBitacora);
+    @DeleteMapping(path = "/eliminar/{idMetodoRenta}")
+    public void eliminar(@PathVariable("idMetodoRenta") Long idMetodoRenta) {
+        metodoRentaRepository.deleteById(idMetodoRenta);
 
     }
 }
