@@ -15,6 +15,7 @@ BEGIN
   :NEW.id_menu := menu_seq.NEXTVAL;
 END;
 
+
 // INSERT INTO MENU(nombre_menu, ruta, fecha_modif, usuario_modif)
 // VALUES ('Menú Principal', '/home/menu', SYSDATE, '1');
 
