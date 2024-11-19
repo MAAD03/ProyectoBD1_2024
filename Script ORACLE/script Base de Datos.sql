@@ -260,5 +260,6 @@ END;
 
 --VISTAS 
 
+
 --vista para bitacora donde se use el id_usuario 
 

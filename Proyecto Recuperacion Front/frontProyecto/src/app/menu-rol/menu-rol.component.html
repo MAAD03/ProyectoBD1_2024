@@ -1,1 +1,59 @@
-<p>menu-rol works!</p>
+<div class="container p-5 fondo">
+    <div>
+        <h1>Menu para Roles</h1>
+        <hr>
+        <form (ngSubmit)="crear()" class=" " style=" width: 800px;" id="formularioCrear">
+            <h2>Asignar menus a roles</h2>
+            <div class="mb-3">
+                <label class="form-label">Rol:</label>
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="menu_rol.idRol" [ngModelOptions]="{standalone:true}" placeholder="" required>
+                    <option selected></option>
+                    <option *ngFor="let rol of rolList" value="{{rol.idRol}}">{{rol.nombreRol}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Menu:</label>
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="menu_rol.idMenu" [ngModelOptions]="{standalone:true}" placeholder="" required>
+                    <option selected></option>
+                    <option *ngFor="let menu of menuList" value="{{menu.idMenu}}">{{menu.nombreMenu}}</option>
+                </select>
+            </div>
+            
+            <div>
+                <input class="btn boton btn-lg " type="submit" value="Guardar">
+                &nbsp;
+                <button class="btn boton btn-lg" click="limpiar()">Limpiar</button>
+            </div>
+        </form>
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <h2>Roles Activos</h2>
+    <br>
+    <table class="table table-dark table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Id de la Relacion</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Menu</th>
+                <th scope="col">Modificaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let menu_rol of menu_rolList">
+                <th scope="row">{{menu_rol.idMenuRol}}</th>
+                <td>{{menu_rol.idRol  | rol: rolList}}</td>
+                <td>{{menu_rol.idMenu | menu: menuList}}</td>
+                <td>
+                    <button class="btn btn-outline-primary" (click)="modificar(menu_rol)">Modificar</button>
+                    &nbsp;
+                    <button class="btn btn-outline-danger" (click)="eliminar(menu_rol)">Eliminar</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

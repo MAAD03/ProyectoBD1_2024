@@ -18,6 +18,8 @@ import { INVENTARIOComponent } from './inventario/inventario.component';
 import { METODORENTAComponent } from './metodo-renta/metodo-renta.component';
 import { TIPOESTADORESERVACIONComponent } from './tipo-estado-reservacion/tipo-estado-reservacion.component';
 import { RESERVACIONComponent } from './reservacion/reservacion.component';
+import { RolPipe } from './rol.pipe';
+import { MenuPipe } from './menu.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { RESERVACIONComponent } from './reservacion/reservacion.component';
     INVENTARIOComponent,
     METODORENTAComponent,
     TIPOESTADORESERVACIONComponent,
-    RESERVACIONComponent
+    RESERVACIONComponent,
+    RolPipe,
+    MenuPipe
   ],
   imports: [
     BrowserModule,
