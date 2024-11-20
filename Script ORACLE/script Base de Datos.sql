@@ -286,62 +286,645 @@ select * from vista_inventario_sucursal;
 
 --vista para bitacora donde se use el id_usuario 
 
+--TRIGGERS PARA BITACORA
+
 CREATE OR REPLACE TRIGGER TRG_BITACORA_MENU
 AFTER INSERT OR UPDATE OR DELETE ON MENU
 FOR EACH ROW
 BEGIN
-    -- Registro para INSERT
+    -- INSERT
     IF INSERTING THEN
         INSERT INTO BITACORA (
             id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
         ) VALUES (
-            bitacora_seq.NEXTVAL,                -- ID autogenerado por la secuencia
-            'INSERT',                            -- Tipo de operación
-            'Se agregó un nuevo registro a MENU', -- Detalle de la operación
-            SYSDATE,                             -- Fecha de la operación
-            USER,                                -- Usuario que realizó la operación
-            'MENU',                              -- Nombre de la tabla
-            NULL,                                -- Datos anteriores (no aplica para INSERT)
-            TO_CLOB(:NEW.id_menu || ' - ' || :NEW.nombre_menu || ' - ' || :NEW.ruta) -- Nuevos datos
+            bitacora_seq.NEXTVAL,                
+            'INSERT',                            
+            'Se agregó un nuevo registro a MENU', 
+            SYSDATE,                             
+            USER,                                
+            'MENU',                              
+            NULL,                                
+            TO_CLOB(:NEW.id_menu || ' - ' || :NEW.nombre_menu || ' - ' || :NEW.ruta)
         );
     END IF;
 
-    -- Registro para UPDATE
+    -- UPDATE
     IF UPDATING THEN
         INSERT INTO BITACORA (
             id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
         ) VALUES (
-            bitacora_seq.NEXTVAL,                -- ID autogenerado por la secuencia
-            'UPDATE',                            -- Tipo de operación
-            'Se actualizó un registro en MENU',  -- Detalle de la operación
-            SYSDATE,                             -- Fecha de la operación
-            USER,                                -- Usuario que realizó la operación
-            'MENU',                              -- Nombre de la tabla
-            TO_CLOB(:OLD.id_menu || ' - ' || :OLD.nombre_menu || ' - ' || :OLD.ruta), -- Datos anteriores
-            TO_CLOB(:NEW.id_menu || ' - ' || :NEW.nombre_menu || ' - ' || :NEW.ruta)  -- Nuevos datos
+            bitacora_seq.NEXTVAL,               
+            'UPDATE',                            
+            'Se actualizó un registro en MENU',  
+            SYSDATE,                             
+            USER,                                
+            'MENU',                              
+            TO_CLOB(:OLD.id_menu || ' - ' || :OLD.nombre_menu || ' - ' || :OLD.ruta), 
+            TO_CLOB(:NEW.id_menu || ' - ' || :NEW.nombre_menu || ' - ' || :NEW.ruta) 
         );
     END IF;
 
-    -- Registro para DELETE
+    -- DELETE
     IF DELETING THEN
         INSERT INTO BITACORA (
             id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
         ) VALUES (
-            bitacora_seq.NEXTVAL,                -- ID autogenerado por la secuencia
-            'DELETE',                            -- Tipo de operación
-            'Se eliminó un registro de MENU',    -- Detalle de la operación
-            SYSDATE,                             -- Fecha de la operación
-            USER,                                -- Usuario que realizó la operación
-            'MENU',                              -- Nombre de la tabla
-            TO_CLOB(:OLD.id_menu || ' - ' || :OLD.nombre_menu || ' - ' || :OLD.ruta), -- Datos eliminados
-            NULL                                 -- Nuevos datos (no aplica para DELETE)
+            bitacora_seq.NEXTVAL,                
+            'DELETE',                           
+            'Se eliminó un registro de MENU',   
+            SYSDATE,                             
+            USER,                                
+            'MENU',                              
+            TO_CLOB(:OLD.id_menu || ' - ' || :OLD.nombre_menu || ' - ' || :OLD.ruta),
+            NULL                                
         );
     END IF;
 END;
-/
+
+CREATE OR REPLACE TRIGGER TRG_BITACORA_ROL
+AFTER INSERT OR UPDATE OR DELETE ON ROL
+FOR EACH ROW
+BEGIN
+    -- INSERT
+    IF INSERTING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'INSERT',                            
+            'Se agregó un nuevo registro a ROL', 
+            SYSDATE,                             
+            USER,                                
+            'ROL',                              
+            NULL,                                
+            TO_CLOB(:NEW.id_rol || ' - ' || :NEW.nombre_rol)
+        );
+    END IF;
+
+    -- UPDATE
+    IF UPDATING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,               
+            'UPDATE',                            
+            'Se actualizó un registro en ROL',  
+            SYSDATE,                             
+            USER,                                
+            'ROL',                              
+            TO_CLOB(:OLD.id_rol || ' - ' || :OLD.nombre_rol), 
+            TO_CLOB(:NEW.id_rol || ' - ' || :NEW.nombre_rol)
+        );
+    END IF;
+
+    -- DELETE
+    IF DELETING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'DELETE',                           
+            'Se eliminó un registro de ROL',   
+            SYSDATE,                             
+            USER,                                
+            'ROL',                              
+            TO_CLOB(:OLD.id_rol || ' - ' || :OLD.nombre_rol), 
+            NULL                                
+        );
+    END IF;
+END;
+
+CREATE OR REPLACE TRIGGER TRG_BITACORA_MENU_ROL
+AFTER INSERT OR UPDATE OR DELETE ON MENU_ROL
+FOR EACH ROW
+BEGIN
+    -- INSERT
+    IF INSERTING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'INSERT',                            
+            'Se agregó un nuevo registro a MENU_ROL', 
+            SYSDATE,                             
+            USER,                                
+            'MENU_ROL',                              
+            NULL,                                
+            TO_CLOB(:NEW.id_menurol || ' - ' || :NEW.id_rol|| ' - ' || :NEW.id_menu)
+        );
+    END IF;
+
+    -- UPDATE
+    IF UPDATING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,               
+            'UPDATE',                            
+            'Se actualizó un registro en MENU_ROL',  
+            SYSDATE,                             
+            USER,                                
+            'MENU_ROL',                              
+            TO_CLOB(:OLD.id_menurol || ' - ' || :OLD.id_rol || ' - ' || :OLD.id_menu), 
+            TO_CLOB(:NEW.id_menurol || ' - ' || :NEW.id_rol|| ' - ' || :NEW.id_menu)
+        );
+    END IF;
+
+    -- DELETE
+    IF DELETING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'DELETE',                           
+            'Se eliminó un registro de MENU_ROL',   
+            SYSDATE,                             
+            USER,                                
+            'MENU_ROL',                              
+            TO_CLOB(:OLD.id_menurol || ' - ' || :OLD.id_rol || ' - ' || :OLD.id_menu),  
+            NULL                                
+        );
+    END IF;
+END;
+
+CREATE OR REPLACE TRIGGER TRG_BITACORA_USUARIO
+AFTER INSERT OR UPDATE OR DELETE ON USUARIO
+FOR EACH ROW
+BEGIN
+    -- INSERT
+    IF INSERTING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'INSERT',                            
+            'Se agregó un nuevo registro a USUARIO', 
+            SYSDATE,                             
+            USER,                                
+            'USUARIO',                              
+            NULL,                                
+            TO_CLOB(:NEW.id_usuario || ' - ' || :NEW.id_rol|| ' - ' || :NEW.nombre || ' - ' || :NEW.apellido|| ' - ' || :NEW.dpi || ' - ' || :NEW.correo|| ' - ' || :NEW.passwordU || ' - ' || :NEW.telefono|| ' - ' || :NEW.direccion)
+        );
+    END IF;
+
+    -- UPDATE
+    IF UPDATING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,               
+            'UPDATE',                            
+            'Se actualizó un registro en USUARIO',  
+            SYSDATE,                             
+            USER,                                
+            'USUARIO',                              
+           TO_CLOB(:OLD.id_usuario || ' - ' || :OLD.id_rol|| ' - ' || :OLD.nombre || ' - ' || :OLD.apellido|| ' - ' || :OLD.dpi || ' - ' || :OLD.correo|| ' - ' || :OLD.passwordU || ' - ' || :OLD.telefono|| ' - ' || :OLD.direccion), 
+           TO_CLOB(:NEW.id_usuario || ' - ' || :NEW.id_rol|| ' - ' || :NEW.nombre || ' - ' || :NEW.apellido|| ' - ' || :NEW.dpi || ' - ' || :NEW.correo|| ' - ' || :NEW.passwordU || ' - ' || :NEW.telefono|| ' - ' || :NEW.direccion)
+        );
+    END IF;
+
+    -- DELETE
+    IF DELETING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'DELETE',                           
+            'Se eliminó un registro de USUARIO',   
+            SYSDATE,                             
+            USER,                                
+            'USUARIO',                              
+            TO_CLOB(:OLD.id_usuario || ' - ' || :OLD.id_rol|| ' - ' || :OLD.nombre || ' - ' || :OLD.apellido|| ' - ' || :OLD.dpi || ' - ' || :OLD.correo|| ' - ' || :OLD.passwordU || ' - ' || :OLD.telefono|| ' - ' || :OLD.direccion), 
+            NULL                                
+        );
+    END IF;
+END;
+
+CREATE OR REPLACE TRIGGER TRG_BITACORA_MARCA
+AFTER INSERT OR UPDATE OR DELETE ON MARCA
+FOR EACH ROW
+BEGIN
+    -- INSERT
+    IF INSERTING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'INSERT',                            
+            'Se agregó un nuevo registro a MARCA', 
+            SYSDATE,                             
+            USER,                                
+            'MARCA',                              
+            NULL,                                
+            TO_CLOB(:NEW.id_marca || ' - ' || :NEW.nombre)
+        );
+    END IF;
+
+    -- UPDATE
+    IF UPDATING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,               
+            'UPDATE',                            
+            'Se actualizó un registro en MARCA',  
+            SYSDATE,                             
+            USER,                                
+            'MARCA',                              
+           TO_CLOB(:OLD.id_marca || ' - ' || :OLD.nombre), 
+            TO_CLOB(:NEW.id_marca || ' - ' || :NEW.nombre)
+          );
+    END IF;
+
+    -- DELETE
+    IF DELETING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'DELETE',                           
+            'Se eliminó un registro de MARCA',   
+            SYSDATE,                             
+            USER,                                
+            'MARCA',                              
+            TO_CLOB(:OLD.id_marca || ' - ' || :OLD.nombre),
+            NULL                                
+        );
+    END IF;
+END;
+
+CREATE OR REPLACE TRIGGER TRG_BITACORA_MOTOCICLETA
+AFTER INSERT OR UPDATE OR DELETE ON MOTOCICLETA
+FOR EACH ROW
+BEGIN
+    -- INSERT
+    IF INSERTING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'INSERT',                            
+            'Se agregó un nuevo registro a MOTOCICLETA', 
+            SYSDATE,                             
+            USER,                                
+            'MOTOCICLETA',                              
+            NULL,                                
+            TO_CLOB(:NEW.id_motocicleta || ' - ' || :NEW.id_marca|| ' - ' || :NEW.modelo || ' - ' || :NEW.kilometraje|| ' - ' || :NEW.cilindraje || ' - ' || :NEW.capacidad|| ' - ' || :NEW.foto)
+        );
+    END IF;
+
+    -- UPDATE
+    IF UPDATING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,               
+            'UPDATE',                            
+            'Se actualizó un registro en MOTOCICLETA',  
+            SYSDATE,                             
+            USER,                                
+            'MOTOCICLETA',                              
+             TO_CLOB(:OLD.id_motocicleta || ' - ' || :OLD.id_marca|| ' - ' || :OLD.modelo || ' - ' || :OLD.kilometraje|| ' - ' || :OLD.cilindraje || ' - ' || :OLD.capacidad|| ' - ' || :OLD.foto), 
+            TO_CLOB(:NEW.id_motocicleta || ' - ' || :NEW.id_marca|| ' - ' || :NEW.modelo || ' - ' || :NEW.kilometraje|| ' - ' || :NEW.cilindraje || ' - ' || :NEW.capacidad|| ' - ' || :NEW.foto)
+        );
+    END IF;
+
+    -- DELETE
+    IF DELETING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'DELETE',                           
+            'Se eliminó un registro de MOTOCICLETA',   
+            SYSDATE,                             
+            USER,                                
+            'MOTOCICLETA',                              
+           TO_CLOB(:OLD.id_motocicleta || ' - ' || :OLD.id_marca|| ' - ' || :OLD.modelo || ' - ' || :OLD.kilometraje|| ' - ' || :OLD.cilindraje || ' - ' || :OLD.capacidad|| ' - ' || :OLD.foto), 
+            NULL                                
+        );
+    END IF;
+END;
+
+CREATE OR REPLACE TRIGGER TRG_BITACORA_SUCURSAL
+AFTER INSERT OR UPDATE OR DELETE ON SUCURSAL
+FOR EACH ROW
+BEGIN
+    -- INSERT
+    IF INSERTING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'INSERT',                            
+            'Se agregó un nuevo registro a SUCURSAL', 
+            SYSDATE,                             
+            USER,                                
+            'SUCURSAL',                              
+            NULL,                                
+            TO_CLOB(:NEW.id_sucursal || ' - ' || :NEW.nombre_local|| ' - ' || :NEW.direccion || ' - ' || :NEW.ciudad_zona|| ' - ' || :NEW.descripcion)
+        );
+    END IF;
+
+    -- UPDATE
+    IF UPDATING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,               
+            'UPDATE',                            
+            'Se actualizó un registro en SUCURSAL',  
+            SYSDATE,                             
+            USER,                                
+            'SUCURSAL',                              
+            TO_CLOB(:OLD.id_sucursal || ' - ' || :OLD.nombre_local|| ' - ' || :OLD.direccion || ' - ' || :OLD.ciudad_zona|| ' - ' || :OLD.descripcion), 
+            TO_CLOB(:NEW.id_sucursal || ' - ' || :NEW.nombre_local|| ' - ' || :NEW.direccion || ' - ' || :NEW.ciudad_zona|| ' - ' || :NEW.descripcion)
+        );
+    END IF;
+
+    -- DELETE
+    IF DELETING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'DELETE',                           
+            'Se eliminó un registro de SUCURSAL',   
+            SYSDATE,                             
+            USER,                                
+            'SUCURSAL',                              
+            TO_CLOB(:OLD.id_sucursal || ' - ' || :OLD.nombre_local|| ' - ' || :OLD.direccion || ' - ' || :OLD.ciudad_zona|| ' - ' || :OLD.descripcion), 
+            NULL                                
+        );
+    END IF;
+END;
+
+CREATE OR REPLACE TRIGGER TRG_BITACORA_TIPO_ESTADO_MOTOCICLETA
+AFTER INSERT OR UPDATE OR DELETE ON TIPO_ESTADO_MOTOCICLETA
+FOR EACH ROW
+BEGIN
+    -- INSERT
+    IF INSERTING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'INSERT',                            
+            'Se agregó un nuevo registro a TIPO_ESTADO_MOTOCICLETA', 
+            SYSDATE,                             
+            USER,                                
+            'TIPO_ESTADO_MOTOCICLETA',                              
+            NULL,                                
+            TO_CLOB(:NEW.id_estado_motocicleta || ' - ' || :NEW.descripcion)
+        );
+    END IF;
+
+    -- UPDATE
+    IF UPDATING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,               
+            'UPDATE',                            
+            'Se actualizó un registro en TIPO_ESTADO_MOTOCICLETA',  
+            SYSDATE,                             
+            USER,                                
+            'TIPO_ESTADO_MOTOCICLETA',                              
+            TO_CLOB(:OLD.id_estado_motocicleta || ' - ' || :OLD.descripcion), 
+           TO_CLOB(:NEW.id_estado_motocicleta || ' - ' || :NEW.descripcion)
+        );
+    END IF;
+
+    -- DELETE
+    IF DELETING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'DELETE',                           
+            'Se eliminó un registro de TIPO_ESTADO_MOTOCICLETA',   
+            SYSDATE,                             
+            USER,                                
+            'TIPO_ESTADO_MOTOCICLETA',                              
+           TO_CLOB(:OLD.id_estado_motocicleta || ' - ' || :OLD.descripcion), 
+            NULL                                
+        );
+    END IF;
+END;
+
+CREATE OR REPLACE TRIGGER TRG_BITACORA_INVENTARIO
+AFTER INSERT OR UPDATE OR DELETE ON INVENTARIO
+FOR EACH ROW
+BEGIN
+    -- INSERT
+    IF INSERTING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'INSERT',                            
+            'Se agregó un nuevo registro a INVENTARIO', 
+            SYSDATE,                             
+            USER,                                
+            'INVENTARIO',                              
+            NULL,                                
+             TO_CLOB(:NEW.id_inventario || ' - ' || :NEW.id_motocicleta|| ' - ' || :NEW.id_sucursal || ' - ' || :NEW.id_estado_motocicleta|| ' - ' || :NEW.precio_km|| ' - ' || :NEW.precio_dia)
+        );
+    END IF;
+
+    -- UPDATE
+    IF UPDATING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,               
+            'UPDATE',                            
+            'Se actualizó un registro en INVENTARIO',  
+            SYSDATE,                             
+            USER,                                
+            'INVENTARIO',                              
+            TO_CLOB(:OLD.id_inventario || ' - ' || :OLD.id_motocicleta|| ' - ' || :OLD.id_sucursal || ' - ' || :OLD.id_estado_motocicleta|| ' - ' || :OLD.precio_km|| ' - ' || :OLD.precio_dia),
+            TO_CLOB(:NEW.id_inventario || ' - ' || :NEW.id_motocicleta|| ' - ' || :NEW.id_sucursal || ' - ' || :NEW.id_estado_motocicleta|| ' - ' || :NEW.precio_km|| ' - ' || :NEW.precio_dia)
+        );
+    END IF;
+
+    -- DELETE
+    IF DELETING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'DELETE',                           
+            'Se eliminó un registro de INVENTARIO',   
+            SYSDATE,                             
+            USER,                                
+            'INVENTARIO',                              
+           TO_CLOB(:OLD.id_inventario || ' - ' || :OLD.id_motocicleta|| ' - ' || :OLD.id_sucursal || ' - ' || :OLD.id_estado_motocicleta|| ' - ' || :OLD.precio_km|| ' - ' || :OLD.precio_dia),
+            NULL                                
+        );
+    END IF;
+END;
+
+CREATE OR REPLACE TRIGGER TRG_BITACORA_METODO_RENTA
+AFTER INSERT OR UPDATE OR DELETE ON METODO_RENTA
+FOR EACH ROW
+BEGIN
+    -- INSERT
+    IF INSERTING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'INSERT',                            
+            'Se agregó un nuevo registro a METODO_RENTA', 
+            SYSDATE,                             
+            USER,                                
+            'METODO_RENTA',                              
+            NULL,                                
+            TO_CLOB(:NEW.id_metodo_renta || ' - ' || :NEW.descripcion)
+        );
+    END IF;
+
+    -- UPDATE
+    IF UPDATING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,               
+            'UPDATE',                            
+            'Se actualizó un registro en METODO_RENTA',  
+            SYSDATE,                             
+            USER,                                
+            'METODO_RENTA',                              
+            TO_CLOB(:OLD.id_metodo_renta || ' - ' || :OLD.descripcion), 
+           TO_CLOB(:NEW.id_metodo_renta || ' - ' || :NEW.descripcion)
+        );
+    END IF;
+
+    -- DELETE
+    IF DELETING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'DELETE',                           
+            'Se eliminó un registro de METODO_RENTA',   
+            SYSDATE,                             
+            USER,                                
+            'METODO_RENTA',                              
+           TO_CLOB(:OLD.id_metodo_renta || ' - ' || :OLD.descripcion), 
+            NULL                                
+        );
+    END IF;
+END;
+
+CREATE OR REPLACE TRIGGER TRG_BITACORA_TIPO_ESTADO_RESERVACION
+AFTER INSERT OR UPDATE OR DELETE ON TIPO_ESTADO_RESERVACION
+FOR EACH ROW
+BEGIN
+    -- INSERT
+    IF INSERTING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'INSERT',                            
+            'Se agregó un nuevo registro a TIPO_ESTADO_RESERVACION', 
+            SYSDATE,                             
+            USER,                                
+            'TIPO_ESTADO_RESERVACION',                              
+            NULL,                                
+            TO_CLOB(:NEW.id_estado_reservacion || ' - ' || :NEW.descripcion)
+        );
+    END IF;
+
+    -- UPDATE
+    IF UPDATING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,               
+            'UPDATE',                            
+            'Se actualizó un registro en TIPO_ESTADO_RESERVACION',  
+            SYSDATE,                             
+            USER,                                
+            'TIPO_ESTADO_RESERVACION',                              
+            TO_CLOB(:OLD.id_estado_reservacion || ' - ' || :OLD.descripcion), 
+           TO_CLOB(:NEW.id_estado_reservacion || ' - ' || :NEW.descripcion)
+        );
+    END IF;
+
+    -- DELETE
+    IF DELETING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'DELETE',                           
+            'Se eliminó un registro de TIPO_ESTADO_RESERVACION',   
+            SYSDATE,                             
+            USER,                                
+            'TIPO_ESTADO_RESERVACION',                              
+           TO_CLOB(:OLD.id_estado_reservacion || ' - ' || :OLD.descripcion), 
+            NULL                                
+        );
+    END IF;
+END;
+
+CREATE OR REPLACE TRIGGER TRG_BITACORA_RESERVACION
+AFTER INSERT OR UPDATE OR DELETE ON RESERVACION
+FOR EACH ROW
+BEGIN
+    -- INSERT
+    IF INSERTING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'INSERT',                            
+            'Se agregó un nuevo registro a RESERVACION', 
+            SYSDATE,                             
+            USER,                                
+            'RESERVACION',                              
+            NULL,                                
+            TO_CLOB(:NEW.id_reservacion || ' - ' || :NEW.id_metodo_renta|| ' - ' || :NEW.id_estado_reservacion || ' - ' || :NEW.id_inventario|| ' - ' || :NEW.id_usuario || ' - ' || :NEW.fecha_inicio|| ' - ' || :NEW.fecha_fin || ' - ' || :NEW.monto_pago)
+        );
+    END IF;
+
+    -- UPDATE
+    IF UPDATING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,               
+            'UPDATE',                            
+            'Se actualizó un registro en RESERVACION',  
+            SYSDATE,                             
+            USER,                                
+            'RESERVACION',                              
+           TO_CLOB(:OLD.id_reservacion || ' - ' || :OLD.id_metodo_renta|| ' - ' || :OLD.id_estado_reservacion || ' - ' || :OLD.id_inventario|| ' - ' || :OLD.id_usuario || ' - ' || :OLD.fecha_inicio|| ' - ' || :OLD.fecha_fin || ' - ' || :OLD.monto_pago), 
+           TO_CLOB(:NEW.id_reservacion || ' - ' || :NEW.id_metodo_renta|| ' - ' || :NEW.id_estado_reservacion || ' - ' || :NEW.id_inventario|| ' - ' || :NEW.id_usuario || ' - ' || :NEW.fecha_inicio|| ' - ' || :NEW.fecha_fin || ' - ' || :NEW.monto_pago)
+        );
+    END IF;
+
+    -- DELETE
+    IF DELETING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                
+            'DELETE',                           
+            'Se eliminó un registro de RESERVACION',   
+            SYSDATE,                             
+            USER,                                
+            'RESERVACION',                              
+             TO_CLOB(:OLD.id_reservacion || ' - ' || :OLD.id_metodo_renta|| ' - ' || :OLD.id_estado_reservacion || ' - ' || :OLD.id_inventario|| ' - ' || :OLD.id_usuario || ' - ' || :OLD.fecha_inicio|| ' - ' || :OLD.fecha_fin || ' - ' || :OLD.monto_pago),
+            NULL                                
+        );
+    END IF;
+END;
 
 
 
-
-
-select * from Bitacora;
+SELECT * FROM Bitacora;
+SELECT trigger_name, table_name, status FROM user_triggers;

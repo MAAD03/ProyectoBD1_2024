@@ -1,1 +1,33 @@
-<p>bitacora works!</p>
+<div class="container mt-5 fondo">
+    <h2 class="text-center mb-4">Bitácora</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">ID Bitácora</th>
+            <th scope="col">Operación</th>
+            <th scope="col">Detalle</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Tabla</th>
+            <th scope="col">Datos Anteriores</th>
+            <th scope="col">Datos Nuevos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Aquí se implementará el *ngFor -->
+          <tr *ngFor="let registro of bitacora">
+            <td>{{ registro.idBitacora }}</td>
+            <td>{{ registro.operacion }}</td>
+            <td>{{ registro.detalleOperacion }}</td>
+            <td>{{ registro.fechaModif | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ registro.usuarioModif }}</td>
+            <td>{{ registro.nombreTabla }}</td>
+            <td>{{ registro.datosAnteriores }}</td>
+            <td>{{ registro.datosNuevos }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

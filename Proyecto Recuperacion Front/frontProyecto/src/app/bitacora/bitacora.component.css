@@ -1,0 +1,31 @@
+.container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #343a40; /* Color del texto */
+    font-weight: bold;
+  }
+  
+  .table {
+    margin-bottom: 0;
+  }
+  
+  .table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #e9ecef;
+  }
+  
+  .fondo{
+    background-color:#E0D3DE;
+}
+.boton{
+    background-color: #788475;
+}
