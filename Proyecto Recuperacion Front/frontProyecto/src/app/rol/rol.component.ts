@@ -74,22 +74,22 @@ export class ROLComponent {
     this.rol = {};
   }
 
-  // Eliminar rol
-  eliminar(rol: any) {
-    if (confirm('¿Estás seguro de que deseas eliminar este rol?')) {
-      this.servicioEliminar(rol).subscribe({
-        next: () => this.buscar(),
-        error: (err) => {
-          console.error('Error al eliminar el rol:', err);
-        },
-      });
-    }
+   // Eliminar menu_rol
+eliminar(rol: any) {
+  if (confirm('¿Estás seguro de que deseas eliminar?')) {
+    this.servicioEliminar(rol.idRol).subscribe({
+      next: () => this.buscar(), 
+      error: (err) => {
+        console.error('Error al eliminar:', err);
+      },
+    });
   }
+}
 
-  servicioEliminar(rol: any): Observable<any> {
-    return this.http.delete(
-      `http://localhost:8080/rol/eliminar/{rol.idRol}`
-    );
-  }
+servicioEliminar(idRol: number): Observable<any> {
+  return this.http.delete(
+    `http://localhost:8080/rol/eliminar/${idRol}`
+  );
+}
 
 }

@@ -73,21 +73,21 @@ export class MenuComponent {
     this.menu = {};
   }
 
-  // Eliminar menú
-  eliminar(menu: any) {
-    if (confirm('¿Estás seguro de que deseas eliminar este menú?')) {
-      this.servicioEliminar(menu).subscribe({
-        next: () => this.buscarMenu(),
-        error: (err) => {
-          console.error('Error al eliminar el menú:', err);
-        },
-      });
-    }
+ // Eliminar menu_rol
+eliminar(menu: any) {
+  if (confirm('¿Estás seguro de que deseas eliminar?')) {
+    this.servicioEliminar(menu.idMenu).subscribe({
+      next: () => this.buscarMenu(), 
+      error: (err) => {
+        console.error('Error al eliminar:', err);
+      },
+    });
   }
+}
 
-  servicioEliminar(menu: any): Observable<any> {
-    return this.http.delete(
-      `http://localhost:8080/menu/eliminar/{menu.idMenu}`
-    );
-  }
+servicioEliminar(idMenu: number): Observable<any> {
+  return this.http.delete(
+    `http://localhost:8080/menu/eliminar/${idMenu}`
+  );
+}
 }

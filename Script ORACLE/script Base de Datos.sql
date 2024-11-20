@@ -259,7 +259,89 @@ END;
 
 
 --VISTAS 
+CREATE OR REPLACE VIEW VISTA_MENUS_POR_ROL AS
+SELECT r.id_rol, r.nombre_rol, m.id_menu, m.nombre_menu, m.ruta
+FROM ROL r
+JOIN MENU_ROL mr ON r.id_rol = mr.id_rol
+JOIN MENU m ON mr.id_menu = m.id_menu;
+
+select * from vista_menus_por_rol;
+
+CREATE OR REPLACE VIEW VISTA_RESERVACIONES_ACTIVAS AS
+SELECT r.id_reservacion, u.nombre, u.apellido, r.fecha_inicio, r.fecha_fin, r.monto_pago
+FROM RESERVACION r
+JOIN USUARIO u ON r.id_usuario = u.id_usuario
+WHERE r.fecha_fin >= SYSDATE;
+
+select * from vista_reservaciones_activas;
+
+CREATE OR REPLACE VIEW VISTA_INVENTARIO_SUCURSAL AS
+SELECT s.nombre_local, m.modelo, i.precio_km, i.precio_dia
+FROM INVENTARIO i
+JOIN MOTOCICLETA m ON i.id_motocicleta = m.id_motocicleta
+JOIN SUCURSAL s ON i.id_sucursal = s.id_sucursal;
+
+select * from vista_inventario_sucursal;
 
 
 --vista para bitacora donde se use el id_usuario 
 
+CREATE OR REPLACE TRIGGER TRG_BITACORA_MENU
+AFTER INSERT OR UPDATE OR DELETE ON MENU
+FOR EACH ROW
+BEGIN
+    -- Registro para INSERT
+    IF INSERTING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                -- ID autogenerado por la secuencia
+            'INSERT',                            -- Tipo de operación
+            'Se agregó un nuevo registro a MENU', -- Detalle de la operación
+            SYSDATE,                             -- Fecha de la operación
+            USER,                                -- Usuario que realizó la operación
+            'MENU',                              -- Nombre de la tabla
+            NULL,                                -- Datos anteriores (no aplica para INSERT)
+            TO_CLOB(:NEW.id_menu || ' - ' || :NEW.nombre_menu || ' - ' || :NEW.ruta) -- Nuevos datos
+        );
+    END IF;
+
+    -- Registro para UPDATE
+    IF UPDATING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                -- ID autogenerado por la secuencia
+            'UPDATE',                            -- Tipo de operación
+            'Se actualizó un registro en MENU',  -- Detalle de la operación
+            SYSDATE,                             -- Fecha de la operación
+            USER,                                -- Usuario que realizó la operación
+            'MENU',                              -- Nombre de la tabla
+            TO_CLOB(:OLD.id_menu || ' - ' || :OLD.nombre_menu || ' - ' || :OLD.ruta), -- Datos anteriores
+            TO_CLOB(:NEW.id_menu || ' - ' || :NEW.nombre_menu || ' - ' || :NEW.ruta)  -- Nuevos datos
+        );
+    END IF;
+
+    -- Registro para DELETE
+    IF DELETING THEN
+        INSERT INTO BITACORA (
+            id_bitacora, operacion, detalle_operacion, fecha_modif, usuario_modif, nombre_tabla, datos_anterior, datos_nuevos
+        ) VALUES (
+            bitacora_seq.NEXTVAL,                -- ID autogenerado por la secuencia
+            'DELETE',                            -- Tipo de operación
+            'Se eliminó un registro de MENU',    -- Detalle de la operación
+            SYSDATE,                             -- Fecha de la operación
+            USER,                                -- Usuario que realizó la operación
+            'MENU',                              -- Nombre de la tabla
+            TO_CLOB(:OLD.id_menu || ' - ' || :OLD.nombre_menu || ' - ' || :OLD.ruta), -- Datos eliminados
+            NULL                                 -- Nuevos datos (no aplica para DELETE)
+        );
+    END IF;
+END;
+/
+
+
+
+
+
+select * from Bitacora;

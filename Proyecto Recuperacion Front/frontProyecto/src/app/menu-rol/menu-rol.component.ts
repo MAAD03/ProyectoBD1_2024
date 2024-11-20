@@ -77,24 +77,24 @@ export class MENUROLComponent {
   limpiar() {
     this.menu_rol = {};
   }
-
-  // Eliminar menu_rol
-  eliminar(menu_rol: any) {
-    if (confirm('¿Estás seguro de que deseas eliminar?')) {
-      this.servicioEliminar(menu_rol).subscribe({
-        next: () => this.buscar(),
-        error: (err) => {
-          console.error('Error al eliminar:', err);
-        },
-      });
-    }
+// Eliminar menu_rol
+eliminar(menu_rol: any) {
+  if (confirm('¿Estás seguro de que deseas eliminar?')) {
+    this.servicioEliminar(menu_rol.idMenuRol).subscribe({
+      next: () => this.buscar(), 
+      error: (err) => {
+        console.error('Error al eliminar:', err);
+      },
+    });
   }
+}
 
-  servicioEliminar(menu_rol: any): Observable<any> {
-    return this.http.delete(
-      `http://localhost:8080/menuRol/eliminar/{menu_rol.idMenuRol}`
-    );
-  }
+servicioEliminar(idMenuRol: number): Observable<any> {
+  return this.http.delete(
+    `http://localhost:8080/menuRol/eliminar/${idMenuRol}`
+  );
+}
+
 
   // Buscar menús
   buscarMenu() {
