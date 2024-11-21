@@ -18,6 +18,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { CrearUsuarioNormalComponent } from './crear-usuario-normal/crear-usuario-normal.component';
+import { MotosParaReservaComponent } from './motos-para-reserva/motos-para-reserva.component';
+import { ReservacionesClienteComponent } from './reservaciones-cliente/reservaciones-cliente.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -37,6 +39,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'inicio', component: InicioComponent, canActivate: [AuthGuard] },
   { path: 'miPerfil', component: MiPerfilComponent },
+  { path: 'motosParaReserva', component: MotosParaReservaComponent },
+  { path: 'reservacionUsuario', component: ReservacionesClienteComponent },
   { path: 'crearUsuarioNormal', component: CrearUsuarioNormalComponent },
   { path: '**', redirectTo: '/login' },
 ];

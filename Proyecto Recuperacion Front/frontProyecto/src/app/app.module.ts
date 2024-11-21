@@ -28,6 +28,8 @@ import { MarcasPipe } from './marcas.pipe';
 import { MotocicletaPipe } from './motocicleta.pipe';
 import { SucursalPipe } from './sucursal.pipe';
 import { EstadoMotosPipe } from './estado-motos.pipe';
+import { MotosParaReservaComponent } from './motos-para-reserva/motos-para-reserva.component';
+import { ReservacionesClienteComponent } from './reservaciones-cliente/reservaciones-cliente.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { EstadoMotosPipe } from './estado-motos.pipe';
     MarcasPipe,
     MotocicletaPipe,
     SucursalPipe,
-    EstadoMotosPipe
+    EstadoMotosPipe,
+    MotosParaReservaComponent,
+    ReservacionesClienteComponent
   ],
   imports: [
     BrowserModule,

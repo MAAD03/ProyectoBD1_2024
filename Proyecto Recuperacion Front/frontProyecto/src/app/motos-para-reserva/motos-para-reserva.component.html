@@ -1,0 +1,37 @@
+<div class="p-5 fondo">
+<div class="container mt-5 ">
+    <h1 class="text-center mb-4">Motos Disponible</h1>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let item of inventarioDisponible">
+        <div class="card h-100">
+          <img src="{{item.foto}}" class="card-img-top" alt="{{item.modeloMotocicleta}}" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">{{item.marca}} - {{item.modeloMotocicleta}}</h5>
+            <p class="card-text">
+              <strong>Cilindraje:</strong> {{item.cilindraje}} cc<br>
+              <strong>Capacidad de Personas:</strong> {{item.capacidad}}<br>
+              <strong>Sucursal:</strong> {{item.sucursal}}<br>
+              <strong>Dirección:</strong> {{item.direccionSucursal}}<br>
+              <strong>Precio por km:</strong> Q{{item.precioKm | number: '1.2-2'}}<br>
+              <strong>Precio por día:</strong> Q{{item.precioDia | number: '1.2-2'}}
+            </p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Reservar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" >Formulario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h2 class="text-center">Realizar una Reservación</h2>
+      </div>
+    </div>
+  </div>
+</div>
+

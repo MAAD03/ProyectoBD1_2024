@@ -1,1 +1,95 @@
-<p>reservacion works!</p>
+<div class="container p-5 fondo">
+    <div>
+        <h1>Reservacion</h1>
+        <hr>
+        <form (ngSubmit)="CrearReservacion()" style="width: 800px;" id="formularioCrear">
+            <h2>Crear Reservacion</h2>
+            <div class="mb-3">
+                <label class="form-label">Estado de la Reservacion:</label>
+                <select class="form-select" [(ngModel)]="reservacion.idEstadoReservacion" [ngModelOptions]="{standalone:true}" required>
+                    <option selected disabled>Seleccione una Estado</option>
+                    <option *ngFor="let estadoResevacion of estadoResevacionList" [value]="estadoResevacion.idEstadoReservacion">{{estadoResevacion.descripcion}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Motocicleta a utilizar:</label>
+                <select class="form-select" [(ngModel)]="reservacion.idInventario" [ngModelOptions]="{standalone:true}" required>
+                    <option selected disabled>Seleccione una Sucursal</option>
+                    <option *ngFor="let inventario of inventarioList" [value]="inventario.idInventario">{{inventario.idInventario}}</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Metodo de Renta:</label>
+                <select class="form-select" [(ngModel)]="reservacion.idMetodoRenta" [ngModelOptions]="{standalone:true}" required>
+                    <option selected disabled>Seleccione un Estado</option>
+                    <option *ngFor="let metodoRenta of metodoRentaList" [value]="metodoRenta.idMetodoRenta">{{metodoRenta.descripcion}}</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Fecha de Inicio</label>
+                <input class="form-control"  type="date" [(ngModel)]="reservacion.fechaInicio" [ngModelOptions]="{standalone:true}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Fecha de Fin</label>
+                <input class="form-control"  type="date" [(ngModel)]="reservacion.fechaFin" [ngModelOptions]="{standalone:true}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Monto</label>
+                <input class="form-control"  type="number" [(ngModel)]="reservacion.montoPago" [ngModelOptions]="{standalone:true}" required>
+            </div>
+            <div>
+                <input class="btn boton btn-lg" type="submit" value="Guardar">
+                &nbsp;
+                <button class="btn boton btn-lg" type="button" (click)="limpiar()">Limpiar</button>
+            </div>
+        </form>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <hr>
+    <h2>Reservaciones Activas</h2>
+    <br>
+    <div>
+    <table class="table table-dark table-striped table-bordered" >
+        <thead >
+            <tr>
+                <th scope="col">Id Reservacion</th>
+                <th scope="col">Metodo de Renta</th>
+                <th scope="col">Estado de Reservacion</th>
+                <th scope="col">Id del Inventario</th>
+                <th scope="col">Fecha de inicio</th>
+                <th scope="col">Fecha de Fin</th>
+                <th scope="col">Monto</th>
+                <th scope="col">Fecha de Modificacion</th>
+                <th scope="col">usuario de Modificacion</th>
+                <th scope="col">Modificaciones</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reservacion of reservacionList">
+                <th scope="row">{{reservacion.idReservacion}}</th>
+                <td>{{reservacion.idMetodoRenta}}</td>
+                <td>{{reservacion.idEstadoReservacion}}</td>
+                <td>{{reservacion.idInventario}}</td>
+                <td>{{reservacion.idUsuario}}</td>
+                <td>{{reservacion.fechaInicio | date }}</td>
+                <td>{{reservacion.fechaFin | date }}</td>
+                <td>{{reservacion.montoPago}}</td>
+                <td>{{reservacion.fechaModif | date }}</td>
+                <td>{{reservacion.usuarioModif}}</td>
+                <td>
+                    <button class="btn btn-outline-primary" (click)="modificar(reservacion)">Modificar</button>
+                    &nbsp;
+                    <button class="btn btn-outline-danger" (click)="eliminar(reservacion)">Eliminar</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

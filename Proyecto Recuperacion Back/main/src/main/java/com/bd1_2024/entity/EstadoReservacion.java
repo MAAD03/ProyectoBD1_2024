@@ -29,12 +29,3 @@ public class EstadoReservacion {
     @Column(name = "usuario_modif", length = 100)
     private String usuarioModif;
 }
-
-/*
- * CREATE TABLE TIPO_ESTADO_RESERVACION(
- * id_estado_reservacion NUMBER PRIMARY KEY NOT NULL,
- * descripcion VARCHAR2(100),
- * fecha_modif DATE,
- * usuario_modif VARCHAR2(100)
- * );
- */

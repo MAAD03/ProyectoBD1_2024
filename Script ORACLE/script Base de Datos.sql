@@ -286,6 +286,34 @@ JOIN SUCURSAL s ON i.id_sucursal = s.id_sucursal;
 
 select * from vista_inventario_sucursal;
 
+CREATE OR REPLACE VIEW VISTA_INVENTARIO_DISPONIBLE AS
+SELECT 
+    i.id_inventario,
+    m.modelo AS modelo_motocicleta,
+    ma.nombre AS marca,
+    m.cilindraje,
+    m.capacidad,
+    m.foto,
+    s.nombre_local AS sucursal,
+    s.direccion AS direccion_sucursal,
+    i.precio_km,
+    i.precio_dia
+FROM 
+    INVENTARIO i
+JOIN MOTOCICLETA m ON i.id_motocicleta = m.id_motocicleta
+JOIN MARCA ma ON m.id_marca = ma.id_marca
+JOIN SUCURSAL s ON i.id_sucursal = s.id_sucursal
+JOIN TIPO_ESTADO_MOTOCICLETA tem ON i.id_estado_motocicleta = tem.id_estado_motocicleta
+WHERE 
+    tem.descripcion = 'Disponible';
+
+
+select * from inventario;
+select * from Tipo_estado_motocicleta;
+select * from tipo_estado_reservacion;
+select * from VISTA_INVENTARIO_DISPONIBLE;
+
+
 --vista para bitacora donde se use el id_usuario 
 
 --TRIGGERS PARA BITACORA
