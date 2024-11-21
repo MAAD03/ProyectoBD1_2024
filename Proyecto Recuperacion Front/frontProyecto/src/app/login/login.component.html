@@ -1,0 +1,39 @@
+<div class="container vh-100 d-flex justify-content-center align-items-center fondo">
+    <div class="card p-4 shadow-lg" style="width: 400px;">
+      <h4 class="text-center fw-bold text-uppercase mb-3">Iniciar Sesión</h4>
+      <p class="text-center text-muted">Proyecto BD1 MotoExpress</p>
+      <form (ngSubmit)="login()" id="loginForm">
+        <div class="mb-3">
+          <label for="correoUsuario" class="form-label">Correo Electrónico</label>
+          <input
+            id="correoUsuario"
+            type="email"
+            class="form-control"
+            [(ngModel)]="usuario.correoUsuario"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Correo"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="passwordUsuario" class="form-label">Contraseña</label>
+          <input
+            id="passwordUsuario"
+            type="password"
+            class="form-control"
+            [(ngModel)]="usuario.passwordUsuario"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Contraseña"
+            required
+          />
+        </div>
+        <div class="mb-3 text-center">
+          <a href="/crearUsuarioNormal" class="text-decoration-none text-primary">Crear Usuario</a>
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Ingresar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

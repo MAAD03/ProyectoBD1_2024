@@ -13,8 +13,14 @@ import { SUCURSALComponent } from './sucursal/sucursal.component';
 import { TIPOESTADOMOTOCICLETAComponent } from './tipo-estado-motocicleta/tipo-estado-motocicleta.component';
 import { TIPOESTADORESERVACIONComponent } from './tipo-estado-reservacion/tipo-estado-reservacion.component';
 import { USUARIOComponent } from './usuario/usuario.component';
+import { LoginComponent } from './login/login.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { AuthGuard } from './guards/auth.guard';
+import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
+import { CrearUsuarioNormalComponent } from './crear-usuario-normal/crear-usuario-normal.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'bitacora', component: BITACORAComponent },
   { path: 'inventario', component: INVENTARIOComponent },
   { path: 'marca', component: MARCAComponent },
@@ -27,7 +33,12 @@ const routes: Routes = [
   { path: 'sucursal', component: SUCURSALComponent },
   { path: 'estadoMotocicleta', component: TIPOESTADOMOTOCICLETAComponent },
   { path: 'estadoReservacion', component: TIPOESTADORESERVACIONComponent },
-  { path: 'usuario', component: USUARIOComponent }
+  { path: 'usuario', component: USUARIOComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'inicio', component: InicioComponent, canActivate: [AuthGuard] },
+  { path: 'miPerfil', component: MiPerfilComponent },
+  { path: 'crearUsuarioNormal', component: CrearUsuarioNormalComponent },
+  { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({

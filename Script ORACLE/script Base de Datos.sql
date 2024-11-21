@@ -15,6 +15,7 @@ BEGIN
   :NEW.id_menu := menu_seq.NEXTVAL;
 END;
 
+select * from rol;
 
 // INSERT INTO MENU(nombre_menu, ruta, fecha_modif, usuario_modif)
 // VALUES ('Menú Principal', '/home/menu', SYSDATE, '1');
@@ -72,11 +73,13 @@ CREATE TABLE USUARIO (
 );
 
 CREATE OR REPLACE TRIGGER trg_usuario_id
-BEFORE INSERT ON ROL
+BEFORE INSERT ON USUARIO
 FOR EACH ROW
 BEGIN
-  :NEW.id_rol := rol_seq.NEXTVAL;
+  :NEW.id_usuario := usuario_seq.NEXTVAL;
 END;
+
+
 
 
 --bitacora
@@ -569,7 +572,7 @@ BEGIN
             USER,                                
             'MOTOCICLETA',                              
             NULL,                                
-            TO_CLOB(:NEW.id_motocicleta || ' - ' || :NEW.id_marca|| ' - ' || :NEW.modelo || ' - ' || :NEW.kilometraje|| ' - ' || :NEW.cilindraje || ' - ' || :NEW.capacidad|| ' - ' || :NEW.foto)
+            TO_CLOB(:NEW.id_motocicleta || ' - ' || :NEW.id_marca|| ' - ' || :NEW.modelo || ' - ' || :NEW.kilometraje|| ' - ' || :NEW.cilindraje || ' - ' || :NEW.capacidad)
         );
     END IF;
 
@@ -584,8 +587,8 @@ BEGIN
             SYSDATE,                             
             USER,                                
             'MOTOCICLETA',                              
-             TO_CLOB(:OLD.id_motocicleta || ' - ' || :OLD.id_marca|| ' - ' || :OLD.modelo || ' - ' || :OLD.kilometraje|| ' - ' || :OLD.cilindraje || ' - ' || :OLD.capacidad|| ' - ' || :OLD.foto), 
-            TO_CLOB(:NEW.id_motocicleta || ' - ' || :NEW.id_marca|| ' - ' || :NEW.modelo || ' - ' || :NEW.kilometraje|| ' - ' || :NEW.cilindraje || ' - ' || :NEW.capacidad|| ' - ' || :NEW.foto)
+             TO_CLOB(:OLD.id_motocicleta || ' - ' || :OLD.id_marca|| ' - ' || :OLD.modelo || ' - ' || :OLD.kilometraje|| ' - ' || :OLD.cilindraje || ' - ' || :OLD.capacidad), 
+            TO_CLOB(:NEW.id_motocicleta || ' - ' || :NEW.id_marca|| ' - ' || :NEW.modelo || ' - ' || :NEW.kilometraje|| ' - ' || :NEW.cilindraje || ' - ' || :NEW.capacidad)
         );
     END IF;
 
@@ -600,7 +603,7 @@ BEGIN
             SYSDATE,                             
             USER,                                
             'MOTOCICLETA',                              
-           TO_CLOB(:OLD.id_motocicleta || ' - ' || :OLD.id_marca|| ' - ' || :OLD.modelo || ' - ' || :OLD.kilometraje|| ' - ' || :OLD.cilindraje || ' - ' || :OLD.capacidad|| ' - ' || :OLD.foto), 
+           TO_CLOB(:OLD.id_motocicleta || ' - ' || :OLD.id_marca|| ' - ' || :OLD.modelo || ' - ' || :OLD.kilometraje|| ' - ' || :OLD.cilindraje || ' - ' || :OLD.capacidad), 
             NULL                                
         );
     END IF;
@@ -925,6 +928,8 @@ BEGIN
 END;
 
 
-
+DELETE FROM BITACORA WHERE id_bitacora = 148;
+select * from usuario;
 SELECT * FROM Bitacora;
+DROP TRIGGER trg_usuario_id;
 SELECT trigger_name, table_name, status FROM user_triggers;

@@ -1,0 +1,46 @@
+<div class="container py-5">
+    <!-- Título de bienvenida -->
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+        <h1 class="display-4">¡Bienvenido, {{ usuario.nombreUsuario }}!</h1>
+        <p class="lead">Perfil de usuario</p>
+      </div>
+    </div>
+  
+    <!-- Datos del perfil -->
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h3>Perfil de {{ usuario.nombreUsuario }}</h3>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>Nombre Completo:</strong> {{ usuario.nombreUsuario }} {{ usuario.apellidoUsuario }}
+              </li>
+              <li class="list-group-item">
+                <strong>DPI:</strong> {{ usuario.dpiUsuario }}
+              </li>
+              <li class="list-group-item">
+                <strong>Correo:</strong> {{ usuario.correoUsuario }}
+              </li>
+              <li class="list-group-item">
+                <strong>Teléfono:</strong> {{ usuario.telefonoUsuario }}
+              </li>
+              <li class="list-group-item">
+                <strong>Dirección:</strong> {{ usuario.direccionUsuario }}
+              </li>
+              <li class="list-group-item">
+                <strong>Fecha de Modificación:</strong> {{ usuario.fechaModif | date: 'medium' }}
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer text-center">
+            <button class="btn btn-danger" (click)="cerrarSesion()">Cerrar Sesión</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

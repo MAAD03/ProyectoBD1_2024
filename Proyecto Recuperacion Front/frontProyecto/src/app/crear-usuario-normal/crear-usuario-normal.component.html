@@ -1,0 +1,49 @@
+<div class="container vh-100 d-flex justify-content-center align-items-center fondo">
+    <div class="card p-4 shadow-lg" style="width: 400px;">
+      <h4 class="text-center fw-bold text-uppercase mb-3">Iniciar Sesión</h4>
+      <p class="text-center text-muted">Proyecto BD1 MotoExpress</p>
+      <form (ngSubmit)="crearUsuario()" style="width: 350px;" id="formularioCrear">
+        <h2>Crear Usuario</h2>
+        <div class="mb-3">
+            <label class="form-label">Nombre:</label>
+            <input class="form-control" type="text" [(ngModel)]="usuario.nombreUsuario" [ngModelOptions]="{standalone:true}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Apellido:</label>
+            <input class="form-control" type="text" [(ngModel)]="usuario.apellidoUsuario" [ngModelOptions]="{standalone:true}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">DPI:</label>
+            <input class="form-control" type="number" [(ngModel)]="usuario.dpiUsuario" [ngModelOptions]="{standalone:true}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Correo:</label>
+            <input class="form-control" type="email" [(ngModel)]="usuario.correoUsuario" [ngModelOptions]="{standalone:true}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Contraseña:</label>
+            <input
+              class="form-control" type="password" [(ngModel)]="usuario.passwordUsuario" [ngModelOptions]="{ standalone: true }" placeholder="Contraseña"required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Escriba Nuevamente la Contraseña:</label>
+            <input class="form-control" type="password" [(ngModel)]="confirmPassword" [ngModelOptions]="{ standalone: true }" placeholder="Confirmar Contraseña" required>
+          </div>
+          
+        <div class="mb-3">
+            <label class="form-label">Teléfono:</label>
+            <input class="form-control" type="number" [(ngModel)]="usuario.telefonoUsuario" [ngModelOptions]="{standalone:true}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Dirección:</label>
+            <input class="form-control" type="text" [(ngModel)]="usuario.direccionUsuario" [ngModelOptions]="{standalone:true}" required>
+        </div>
+        <div>
+            <input class="btn btn-primary btn-lg" type="submit" value="Guardar">
+            &nbsp;
+            <button class="btn btn-danger btn-lg" type="button" (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+    </div>
+  </div>
+  

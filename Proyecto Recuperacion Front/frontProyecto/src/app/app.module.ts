@@ -20,6 +20,11 @@ import { TIPOESTADORESERVACIONComponent } from './tipo-estado-reservacion/tipo-e
 import { RESERVACIONComponent } from './reservacion/reservacion.component';
 import { RolPipe } from './rol.pipe';
 import { MenuPipe } from './menu.pipe';
+import { LoginComponent } from './login/login.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
+import { CrearUsuarioNormalComponent } from './crear-usuario-normal/crear-usuario-normal.component';
+import { MarcasPipe } from './marcas.pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +43,12 @@ import { MenuPipe } from './menu.pipe';
     TIPOESTADORESERVACIONComponent,
     RESERVACIONComponent,
     RolPipe,
-    MenuPipe
+    MenuPipe,
+    LoginComponent,
+    InicioComponent,
+    MiPerfilComponent,
+    CrearUsuarioNormalComponent,
+    MarcasPipe
   ],
   imports: [
     BrowserModule,

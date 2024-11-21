@@ -10,6 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class MenuComponent {
   menu: any = {};
   menuList: any[] = [];
+  usuarioSesion: any = {};
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -19,6 +20,7 @@ export class MenuComponent {
 
   constructor(private http: HttpClient) {
     this.buscarMenu();
+    this.usuarioSesion = JSON.parse(localStorage.getItem('usuario') || '{}');
   }
 
   // Crear menú
@@ -26,7 +28,7 @@ export class MenuComponent {
     let validarFormulario: any = document.getElementById('formularioCrear');
     if (validarFormulario.reportValidity()) {
       this.menu.fechaModif = new Date().toISOString();
-      this.menu.usuarioModif = 'usuario prueba';
+      this.menu.usuarioModif = this.usuarioSesion.idUsuario.toString();
       console.log(this.menu);
       this.servicioCrear().subscribe({
         next: () => {

@@ -1,1 +1,104 @@
-<p>usuario works!</p>
+<div class="container p-5 fondo">
+    <div>
+        <h1>Usuario</h1>
+        <hr>
+        <form (ngSubmit)="crearUsuario()" style="width: 800px;" id="formularioCrear">
+            <h2>Crear Usuario</h2>
+            <div class="mb-3">
+                <label class="form-label">Rol:</label>
+                <select class="form-select" [(ngModel)]="usuario.idRol" [ngModelOptions]="{standalone:true}" required>
+                    <option selected disabled>Seleccione un Rol</option>
+                    <option *ngFor="let rol of rolList" [value]="rol.idRol">{{rol.nombreRol}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Nombre:</label>
+                <input class="form-control" type="text" [(ngModel)]="usuario.nombreUsuario" [ngModelOptions]="{standalone:true}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Apellido:</label>
+                <input class="form-control" type="text" [(ngModel)]="usuario.apellidoUsuario" [ngModelOptions]="{standalone:true}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">DPI:</label>
+                <input class="form-control" type="number" [(ngModel)]="usuario.dpiUsuario" [ngModelOptions]="{standalone:true}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Correo:</label>
+                <input class="form-control" type="email" [(ngModel)]="usuario.correoUsuario" [ngModelOptions]="{standalone:true}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Contraseña:</label>
+                <input
+                  class="form-control" type="password" [(ngModel)]="usuario.passwordUsuario" [ngModelOptions]="{ standalone: true }" placeholder="Contraseña"required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Escriba Nuevamente la Contraseña:</label>
+                <input class="form-control" type="password" [(ngModel)]="confirmPassword" [ngModelOptions]="{ standalone: true }" placeholder="Confirmar Contraseña" required>
+              </div>
+              
+            <div class="mb-3">
+                <label class="form-label">Teléfono:</label>
+                <input class="form-control" type="number" [(ngModel)]="usuario.telefonoUsuario" [ngModelOptions]="{standalone:true}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Dirección:</label>
+                <input class="form-control" type="text" [(ngModel)]="usuario.direccionUsuario" [ngModelOptions]="{standalone:true}" required>
+            </div>
+            <div>
+                <input class="btn boton btn-lg" type="submit" value="Guardar">
+                &nbsp;
+                <button class="btn boton btn-lg" type="button" (click)="limpiar()">Limpiar</button>
+            </div>
+        </form>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <hr>
+    <h2>Usuarios Activos</h2>
+    <br>
+    <div>
+    <table class="table table-dark table-striped table-bordered" >
+        <thead >
+            <tr>
+                <th scope="col">Id del Usuario</th>
+                <th scope="col">Rol del Usuario</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">DPI</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Contrasena</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Fecha de Modificacion</th>
+                <th scope="col">usuario de Modificacion</th>
+                <th scope="col">Modificaciones</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of usuarioList">
+                <th scope="row">{{usuario.idUsuario}}</th>
+                <td>{{usuario.idRol |  rol: rolList}}</td>
+                <td>{{usuario.nombreUsuario}}</td>
+                <td>{{usuario.apellidoUsuario}}</td>
+                <td>{{usuario.dpiUsuario}}</td>
+                <td>{{usuario.correoUsuario}}</td>
+                <td>{{usuario.passwordUsuario}}</td>
+                <td>{{usuario.telefonoUsuario}}</td>
+                <td>{{usuario.direccionUsuario}}</td>
+                <td>{{usuario.fechaModif | date }}</td>
+                <td>{{usuario.usuarioModif}}</td>
+                <td>
+                    <button class="btn btn-outline-primary" (click)="modificar(usuario)">Modificar</button>
+                    &nbsp;
+                    <button class="btn btn-outline-danger" (click)="eliminar(usuario)">Eliminar</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

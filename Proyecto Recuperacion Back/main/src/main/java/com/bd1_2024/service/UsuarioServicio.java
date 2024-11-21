@@ -36,4 +36,18 @@ public class UsuarioServicio {
         usuarioRepository.deleteById(idUsuario);
     }
 
+    @PostMapping(path = "/login")
+    public Usuario login(@RequestBody Usuario usuario) {
+
+        List<Usuario> usuarios = usuarioRepository.findByCorreoUsuarioAndPasswordUsuario(
+                usuario.getCorreoUsuario(),
+                usuario.getPasswordUsuario());
+
+        Usuario usuarioRetorno = null;
+        if (!usuarios.isEmpty()) {
+            usuarioRetorno = usuarios.get(0);
+        }
+        return usuarioRetorno;
+    }
+
 }

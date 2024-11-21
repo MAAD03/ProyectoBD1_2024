@@ -1,4 +1,4 @@
-<div class="container mt-5 fondo">
+<div class="container p-5 fondo">
     <h2 class="text-center mb-4">Bitácora</h2>
     <div class="table-responsive">
       <table class="table table-bordered table-striped table-hover">
@@ -15,16 +15,15 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Aquí se implementará el *ngFor -->
-          <tr *ngFor="let registro of bitacora">
-            <td>{{ registro.idBitacora }}</td>
-            <td>{{ registro.operacion }}</td>
-            <td>{{ registro.detalleOperacion }}</td>
-            <td>{{ registro.fechaModif | date:'dd/MM/yyyy HH:mm' }}</td>
-            <td>{{ registro.usuarioModif }}</td>
-            <td>{{ registro.nombreTabla }}</td>
-            <td>{{ registro.datosAnteriores }}</td>
-            <td>{{ registro.datosNuevos }}</td>
+          <tr *ngFor="let bitacora of bitacoraList">
+            <td>{{ bitacora.idBitacora }}</td>
+            <td>{{ bitacora.operacion }}</td>
+            <td>{{ bitacora.detalleOperacion }}</td>
+            <td>{{ bitacora.fechaModif | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ bitacora.usuarioModif }}</td>
+            <td>{{ bitacora.nombreTabla }}</td>
+            <td>{{ bitacora.datosAnterior}}</td>
+            <td>{{ bitacora.datosNuevos }}</td>
           </tr>
         </tbody>
       </table>

@@ -11,6 +11,7 @@ export class ROLComponent {
   
   rol: any = {};
   rolList: any[] = [];
+  usuarioSesion: any = {};
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -20,6 +21,7 @@ export class ROLComponent {
 
   constructor(private http: HttpClient) {
     this.buscar();
+    this.usuarioSesion = JSON.parse(localStorage.getItem('usuario') || '{}');
   }
 
   // Crear Rol
@@ -27,7 +29,7 @@ export class ROLComponent {
     let validarFormulario: any = document.getElementById('formularioCrear');
     if (validarFormulario.reportValidity()) {
       this.rol.fechaModif = new Date().toISOString();
-      this.rol.usuarioModif = 'usuario prueba';
+      this.rol.usuarioModif = this.usuarioSesion.idUsuario.toString();
       console.log(this.rol);
       this.servicioCrear().subscribe({
         next: () => {
@@ -74,7 +76,7 @@ export class ROLComponent {
     this.rol = {};
   }
 
-   // Eliminar menu_rol
+   // Eliminar rol
 eliminar(rol: any) {
   if (confirm('¿Estás seguro de que deseas eliminar?')) {
     this.servicioEliminar(rol.idRol).subscribe({
