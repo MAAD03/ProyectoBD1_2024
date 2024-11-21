@@ -1,1 +1,88 @@
-<p>inventario works!</p>
+<div class="container p-5 fondo">
+    <div>
+        <h1>Inventario</h1>
+        <hr>
+        <form (ngSubmit)="CrearInventario()" style="width: 800px;" id="formularioCrear">
+            <h2>Crear Inventario</h2>
+            <div class="mb-3">
+                <label class="form-label">Motocicleta a utilizar:</label>
+                <select class="form-select" [(ngModel)]="inventario.idMotocicleta" [ngModelOptions]="{standalone:true}" required>
+                    <option selected disabled>Seleccione una Motocicleta</option>
+                    <option *ngFor="let motocicleta of motocicletaList" [value]="motocicleta.idMotocicleta">{{motocicleta.modelo}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Sucursal en donde se encuentra el invetario de motocicleta:</label>
+                <select class="form-select" [(ngModel)]="inventario.idSucursal" [ngModelOptions]="{standalone:true}" required>
+                    <option selected disabled>Seleccione una Sucursal</option>
+                    <option *ngFor="let sucursal of sucursalList" [value]="sucursal.idSucursal">{{sucursal.nombreLocal}}</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Estado del inventario (El estado de la motocicleta):</label>
+                <select class="form-select" [(ngModel)]="inventario.idEstadoMotocicleta" [ngModelOptions]="{standalone:true}" required>
+                    <option selected disabled>Seleccione un Estado</option>
+                    <option *ngFor="let estadoMotocicleta of estadoMotocicletaList" [value]="estadoMotocicleta.idEstadoMotocicleta">{{estadoMotocicleta.descripcion}}</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Precio por KM en Q:</label>
+                <input class="form-control"  type="number" step="0.01" min="0" placeholder="0.00" [(ngModel)]="inventario.precioKm" [ngModelOptions]="{standalone:true}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Precio por dia en Q:</label>
+                <input class="form-control" type="number" step="0.01" min="0" placeholder="0.00" [(ngModel)]="inventario.precioDia" [ngModelOptions]="{standalone:true}" required>
+            </div>
+            <div>
+                <input class="btn boton btn-lg" type="submit" value="Guardar">
+                &nbsp;
+                <button class="btn boton btn-lg" type="button" (click)="limpiar()">Limpiar</button>
+            </div>
+        </form>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <hr>
+    <h2>Inventarios Activos</h2>
+    <br>
+    <div>
+    <table class="table table-dark table-striped table-bordered" >
+        <thead >
+            <tr>
+                <th scope="col">Id Inventario</th>
+                <th scope="col">Motocicleta</th>
+                <th scope="col">Sucursal</th>
+                <th scope="col">Estado del Inventario</th>
+                <th scope="col">Precio por KM</th>
+                <th scope="col">Precio por Dia</th>
+                <th scope="col">Fecha de Modificacion</th>
+                <th scope="col">usuario de Modificacion</th>
+                <th scope="col">Modificaciones</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let inventario of inventarioList">
+                <th scope="row">{{inventario.idInventario}}</th>
+                <td>{{inventario.idMotocicleta | motocicleta: motocicletaList}}</td>
+                <td>{{inventario.idSucursal | sucursal: sucursalList}}</td>
+                <td>{{inventario.idEstadoMotocicleta | estadoMotos: estadoMotocicletaList}}</td>
+                <td>{{inventario.precioKm}}</td>
+                <td>{{inventario.precioDia}}</td>
+                <td>{{inventario.fechaModif | date }}</td>
+                <td>{{inventario.usuarioModif}}</td>
+                <td>
+                    <button class="btn btn-outline-primary" (click)="modificar(inventario)">Modificar</button>
+                    &nbsp;
+                    <button class="btn btn-outline-danger" (click)="eliminar(inventario)">Eliminar</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

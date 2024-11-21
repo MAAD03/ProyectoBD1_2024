@@ -94,7 +94,7 @@ eliminar(motocicleta: any) {
 
 servicioEliminar(idMotocicleta: number): Observable<any> {
   return this.http.delete(
-    `http://localhost:8080/usuario/motocicleta/${idMotocicleta}`
+    `http://localhost:8080/motocicleta/eliminar/${idMotocicleta}`
   );
 }
 

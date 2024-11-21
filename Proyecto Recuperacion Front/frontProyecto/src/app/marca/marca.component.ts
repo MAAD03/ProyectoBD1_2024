@@ -36,7 +36,7 @@ export class MARCAComponent {
           this.marca = {};
         },
         error: (err) => {
-          console.error('Error al crear el menú:', err);
+          console.error('Error al crear la marca:', err);
         },
       });
     }
@@ -89,7 +89,8 @@ eliminar(marca: any) {
 
 servicioEliminar(idMarca: number): Observable<any> {
   return this.http.delete(
-    `http://localhost:8080/rol/marca/${idMarca}`
+    `http://localhost:8080/marca/eliminar/${idMarca}`
   );
 }
 }
+

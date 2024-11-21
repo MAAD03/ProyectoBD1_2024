@@ -286,7 +286,6 @@ JOIN SUCURSAL s ON i.id_sucursal = s.id_sucursal;
 
 select * from vista_inventario_sucursal;
 
-
 --vista para bitacora donde se use el id_usuario 
 
 --TRIGGERS PARA BITACORA

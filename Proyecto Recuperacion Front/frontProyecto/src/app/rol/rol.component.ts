@@ -37,7 +37,7 @@ export class ROLComponent {
           this.rol = {};
         },
         error: (err) => {
-          console.error('Error al crear el menú:', err);
+          console.error('Error al crear el rol:', err);
         },
       });
     }

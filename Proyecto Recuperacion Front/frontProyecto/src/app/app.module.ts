@@ -25,6 +25,9 @@ import { InicioComponent } from './inicio/inicio.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { CrearUsuarioNormalComponent } from './crear-usuario-normal/crear-usuario-normal.component';
 import { MarcasPipe } from './marcas.pipe';
+import { MotocicletaPipe } from './motocicleta.pipe';
+import { SucursalPipe } from './sucursal.pipe';
+import { EstadoMotosPipe } from './estado-motos.pipe';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { MarcasPipe } from './marcas.pipe';
     InicioComponent,
     MiPerfilComponent,
     CrearUsuarioNormalComponent,
-    MarcasPipe
+    MarcasPipe,
+    MotocicletaPipe,
+    SucursalPipe,
+    EstadoMotosPipe
   ],
   imports: [
     BrowserModule,
